@@ -1,3 +1,7 @@
+import cakesSpecialImg from './assets/images/cakes_special_1779797201179.png';
+import browniesSpecialImg from './assets/images/brownies_special_1779797159768.png';
+import cupcakesSpecialImg from './assets/images/cupcakes_special_1779797178372.png';
+
 export interface Product {
   id: string;
   name: string;
@@ -23,7 +27,7 @@ export const PRODUCTS: Product[] = [
     badge: 'Bestseller',
     badgeColor: 'pink',
     description: 'Decadent multi-layered moist chocolate sponge sandwiched with dark chocolate ganache, finished with a mirror-glaze truffle coat.',
-    image: '/src/assets/images/cakes_special_1779797201179.png',
+    image: cakesSpecialImg,
     features: ['Real premium dark chocolate', 'Moist layers', 'Includes candle & spatula'],
     isVeg: true,
   },
@@ -90,7 +94,7 @@ export const PRODUCTS: Product[] = [
     badge: 'New Arrival',
     badgeColor: 'teal',
     description: 'Dense fudgy brownie swirled with original Lotus cookie butter spread and topped with a whole speculoos crunchy biscuit.',
-    image: '/src/assets/images/brownies_special_1779797159768.png',
+    image: browniesSpecialImg,
     features: ['Imported Lotus Speculoos', 'Chewy fudgy texture', 'Perfect tea pairing'],
     isVeg: true,
   },
@@ -159,7 +163,7 @@ export const PRODUCTS: Product[] = [
     badge: 'Get 10% Off',
     badgeColor: 'pink',
     description: 'Includes 2 Walnut Fudge Brownies & 2 Double Chocolate Drizzle slices in our bespoke golden rigid presentation packaging.',
-    image: '/src/assets/images/brownies_special_1779797159768.png',
+    image: browniesSpecialImg,
     features: ['Bespoke protective case', 'Great birthday gift layout', 'Includes customizable greetings card'],
     isVeg: true,
   },
@@ -172,7 +176,7 @@ export const PRODUCTS: Product[] = [
     badge: 'Gift Pack',
     badgeColor: 'gold',
     description: 'Curated box of six fluffy cupcakes topped with magnificent pastel pink buttercream and golden sugar pearls.',
-    image: '/src/assets/images/cupcakes_special_1779797178372.png',
+    image: cupcakesSpecialImg,
     features: ['Perfect table highlight', '6 individually padded slots', 'Free customized card tags'],
     isVeg: true,
   },

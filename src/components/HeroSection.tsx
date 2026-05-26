@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ChefHat, ArrowDown, ClipboardList } from 'lucide-react';
 import { CONTACT_INFO } from '../data';
+import heroCoverImg from '../assets/images/hero_cover_1779797137466.png';
 
 export default function HeroSection() {
   const handleScrollToMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,7 +26,7 @@ export default function HeroSection() {
       {/* Background Image with Warm Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/hero_cover_1779797137466.png"
+          src={heroCoverImg}
           alt="Vaishali Bakers Signature Cake and Brownies Platter"
           className="w-full h-full object-cover opacity-35 scale-105 select-none"
           referrerPolicy="no-referrer"

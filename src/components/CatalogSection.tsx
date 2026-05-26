@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Grid, Eye, MessageCircle, Heart, Plus, Minus, Cake, Sparkles, Award, Coffee } from 'lucide-react';
 import { PRODUCTS, Product } from '../data';
+import cakesSpecialImg from '../assets/images/cakes_special_1779797201179.png';
+import cupcakesSpecialImg from '../assets/images/cupcakes_special_1779797178372.png';
 
 // Custom interface representing a product in the active selection
 export interface CartItem {
@@ -56,7 +58,7 @@ export default function CatalogSection({
       id: 'cakes' as const,
       label: 'Cakes',
       labelColor: 'text-brand-pink font-bold',
-      image: '/src/assets/images/cakes_special_1779797201179.png',
+      image: cakesSpecialImg,
       caption: 'Fresh Customised celebration cakes'
     },
     {
@@ -77,7 +79,7 @@ export default function CatalogSection({
       id: 'snacks-box' as const,
       label: 'Snacks Box',
       labelColor: 'text-[#3d2314] font-semibold',
-      image: '/src/assets/images/cupcakes_special_1779797178372.png',
+      image: cupcakesSpecialImg,
       caption: 'Premium gifting combos & cupcakes'
     }
   ];
