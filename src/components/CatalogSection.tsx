@@ -84,39 +84,12 @@ export default function CatalogSection({
       labelColor: 'text-brand-pink font-bold',
       image: cakesSpecialImg,
       caption: 'Fresh Customised celebration cakes'
-    },
-    {
-      id: 'brownies' as const,
-      label: 'Brownies',
-      labelColor: 'text-brand-brown font-bold',
-      image: browniesSpecialImg,
-      caption: 'Fresh baked fudgy brownies'
-    },
-    {
-      id: 'chocolate-cupcakes' as const,
-      label: 'Chocolate Cupcakes',
-      labelColor: 'text-[#db0075] font-bold',
-      image: cupcakesSpecialImg,
-      caption: 'Fluffy custom iced chocolate cupcakes'
-    },
-    {
-      id: 'vanilla-cupcakes' as const,
-      label: 'Vanilla sponge cupcakes',
-      labelColor: 'text-stone-700 font-bold',
-      image: 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=300',
-      caption: 'Classic soft vanilla sponge cupcakes'
     }
   ];
 
   // Map category helper tags to aesthetic sparkles matching image
   const getCategoryTitle = () => {
-    switch (activeTab) {
-      case 'cakes': return 'Custom Celebration Cakes';
-      case 'brownies': return 'Fresh Fudgy Brownies';
-      case 'chocolate-cupcakes': return 'Chocolate Cupcakes';
-      case 'vanilla-cupcakes': return 'Vanilla Sponge Cupcakes';
-      default: return 'Our Complete Menu List';
-    }
+    return 'Custom Celebration Cakes';
   };
 
   return (
@@ -126,46 +99,48 @@ export default function CatalogSection({
         {/* ========================================== */}
         {/* "OUR MENU" HERO BRAND CARDS (Refer to Screenshot 1) */}
         {/* ========================================== */}
-        <div className="mb-14">
-          <div className="text-center sm:text-left mb-8">
-            <h2 className="text-3xl font-sans text-brand-brown font-extrabold tracking-tight">Our Menu</h2>
-            <p className="text-sm font-sans text-gray-500 mt-1">Explore our freshly baked delights</p>
-          </div>
+        {categoryHighlights.length > 1 && (
+          <div className="mb-14">
+            <div className="text-center sm:text-left mb-8">
+              <h2 className="text-3xl font-sans text-brand-brown font-extrabold tracking-tight">Our Menu</h2>
+              <p className="text-sm font-sans text-gray-500 mt-1">Explore our freshly baked delights</p>
+            </div>
 
-          {/* Grid Layout of the Category Cover Images */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {categoryHighlights.map((cat) => {
-              const works = activeTab === cat.id;
-              return (
-                <motion.div
-                  key={cat.id}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => selectCategory(cat.id)}
-                  className={`bg-white rounded-[2rem] p-3 shadow-xs hover:shadow-md transition-all cursor-pointer border-2 w-full ${
-                    works ? 'border-brand-pink shadow-pink-100 bg-pink-50/10' : 'border-stone-50'
-                  }`}
-                >
-                  <div className="relative aspect-square w-full rounded-[1.6rem] overflow-hidden bg-stone-55 shadow-inner">
-                    <img
-                      src={cat.image}
-                      alt={cat.label}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      referrerPolicy="no-referrer"
-                    />
-                    {/* Dark gradient mapping inside circle */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/10 to-transparent"></div>
-                  </div>
-                  <div className="text-center pt-3 pb-1">
-                    <span className={`text-[13px] sm:text-[15px] block font-sans font-extrabold tracking-tight leading-none ${cat.labelColor}`}>
-                      {cat.label}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })}
+            {/* Grid Layout of the Category Cover Images */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              {categoryHighlights.map((cat) => {
+                const works = activeTab === cat.id;
+                return (
+                  <motion.div
+                    key={cat.id}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => selectCategory(cat.id)}
+                    className={`bg-white rounded-[2rem] p-3 shadow-xs hover:shadow-md transition-all cursor-pointer border-2 w-full ${
+                      works ? 'border-brand-pink shadow-pink-100 bg-pink-50/10' : 'border-stone-50'
+                    }`}
+                  >
+                    <div className="relative aspect-square w-full rounded-[1.6rem] overflow-hidden bg-stone-55 shadow-inner">
+                      <img
+                        src={cat.image}
+                        alt={cat.label}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Dark gradient mapping inside circle */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/10 to-transparent"></div>
+                    </div>
+                    <div className="text-center pt-3 pb-1">
+                      <span className={`text-[13px] sm:text-[15px] block font-sans font-extrabold tracking-tight leading-none ${cat.labelColor}`}>
+                        {cat.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ========================================== */}
         {/* SUB-CATEGORY HEADINGS ROW (Refer to Screenshot 2) */}
@@ -182,27 +157,29 @@ export default function CatalogSection({
           </div>
 
           {/* Quick tab filters toggle pills */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-pink-50/40 rounded-xl border border-pink-100/20 max-w-full overflow-x-auto">
-            <button
-              onClick={() => setActiveTab('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                activeTab === 'all' ? 'bg-[#db0075] text-white shadow-xs' : 'text-stone-600 hover:text-stone-900'
-              }`}
-            >
-              All Items
-            </button>
-            {categoryHighlights.map((ch) => (
+          {categoryHighlights.length > 1 && (
+            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-pink-50/40 rounded-xl border border-pink-100/20 max-w-full overflow-x-auto">
               <button
-                key={ch.id}
-                onClick={() => setActiveTab(ch.id)}
+                onClick={() => setActiveTab('all')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  activeTab === ch.id ? 'bg-[#db0075] text-white shadow-xs' : 'text-stone-600 hover:text-[#db0075]'
+                  activeTab === 'all' ? 'bg-[#db0075] text-white shadow-xs' : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
-                {ch.label}
+                All Items
               </button>
-            ))}
-          </div>
+              {categoryHighlights.map((ch) => (
+                <button
+                  key={ch.id}
+                  onClick={() => setActiveTab(ch.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    activeTab === ch.id ? 'bg-[#db0075] text-white shadow-xs' : 'text-stone-600 hover:text-[#db0075]'
+                  }`}
+                >
+                  {ch.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* ========================================== */}
@@ -225,16 +202,16 @@ export default function CatalogSection({
 
               return (
                 <motion.div
-                  key={product.id}
+                  key={`${activeTab}-${product.id}`}
                   layout
-                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                  initial={{ opacity: 0, y: 15, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.96 }}
                   transition={{ 
                     default: { 
-                      duration: 0.45, 
-                      ease: [0.16, 1, 0.3, 1], // easeOutQuart 
-                      delay: index * 0.05 
+                      duration: 0.35, 
+                      ease: [0.16, 1, 0.3, 1], 
+                      delay: index * 0.035 
                     },
                     layout: { 
                       type: 'spring', 

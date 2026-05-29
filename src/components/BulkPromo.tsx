@@ -8,7 +8,7 @@ export default function BulkPromo() {
   const [quantity, setQuantity] = useState<number>(50);
 
   // Price details
-  const unitPrice = itemType === 'cupcakes' ? 70 : 90;
+  const unitPrice = itemType === 'cupcakes' ? 50 : 40;
   const deliveryThreshold = 50;
 
   // Let's add an auto bulk discount! E.g. 5% off for 100+, 10% off for 150+
