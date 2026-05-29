@@ -64,21 +64,21 @@ export default function CatalogSection({
     {
       id: 'new-launch' as const,
       label: 'New Launch',
-      labelColor: 'text-[#3d2314] font-semibold',
+      labelColor: 'text-brand-brown font-semibold',
       image: 'https://images.unsplash.com/photo-1603532648955-039310d9ed75?auto=format&fit=crop&q=80&w=300',
       caption: 'Fresh Nutella & Biscoff arrivals'
     },
     {
       id: 'pastries' as const,
       label: 'Pastries',
-      labelColor: 'text-[#3d2314] font-semibold',
+      labelColor: 'text-brand-brown font-semibold',
       image: 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=300',
       caption: 'Handy individual mousse slices'
     },
     {
       id: 'snacks-box' as const,
       label: 'Snacks Box',
-      labelColor: 'text-[#3d2314] font-semibold',
+      labelColor: 'text-brand-brown font-semibold',
       image: cupcakesSpecialImg,
       caption: 'Premium gifting combos & cupcakes'
     }
@@ -96,7 +96,7 @@ export default function CatalogSection({
   };
 
   return (
-    <section id="catalog-section" className="py-16 px-4 bg-[#FAF7F2] relative border-t border-stone-200/40">
+    <section id="catalog-section" className="py-16 px-4 bg-white relative border-t border-stone-100">
       <div className="max-w-7xl mx-auto">
         
         {/* ========================================== */}
@@ -104,7 +104,7 @@ export default function CatalogSection({
         {/* ========================================== */}
         <div className="mb-14">
           <div className="text-center sm:text-left mb-8">
-            <h2 className="text-3xl font-serif text-[#3d2314] font-bold tracking-tight">Our Menu</h2>
+            <h2 className="text-3xl font-sans text-brand-brown font-extrabold tracking-tight">Our Menu</h2>
             <p className="text-sm font-sans text-gray-500 mt-1">Explore our freshly baked delights</p>
           </div>
 
@@ -118,11 +118,11 @@ export default function CatalogSection({
                   whileHover={{ y: -6, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => selectCategory(cat.id)}
-                  className={`bg-white rounded-[2rem] p-3 shadow-sm hover:shadow-md transition-all cursor-pointer border-2 ${
-                    works ? 'border-brand-pink shadow-[#db2777]/10 bg-pink-50/20' : 'border-stone-100'
+                  className={`bg-white rounded-[2rem] p-3 shadow-xs hover:shadow-md transition-all cursor-pointer border-2 ${
+                    works ? 'border-brand-pink shadow-pink-100 bg-pink-50/10' : 'border-stone-50'
                   }`}
                 >
-                  <div className="relative aspect-square w-full rounded-[1.6rem] overflow-hidden bg-stone-100 shadow-inner">
+                  <div className="relative aspect-square w-full rounded-[1.6rem] overflow-hidden bg-stone-55 overflow-hidden shadow-inner">
                     <img
                       src={cat.image}
                       alt={cat.label}
@@ -130,10 +130,10 @@ export default function CatalogSection({
                       referrerPolicy="no-referrer"
                     />
                     {/* Dark gradient mapping inside circle */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/10 to-transparent"></div>
                   </div>
                   <div className="text-center pt-3 pb-1">
-                    <span className={`text-[15px] block font-serif tracking-tight leading-none ${cat.labelColor}`}>
+                    <span className={`text-[15px] block font-sans font-extrabold tracking-tight leading-none ${cat.labelColor}`}>
                       {cat.label}
                     </span>
                   </div>
@@ -146,11 +146,11 @@ export default function CatalogSection({
         {/* ========================================== */}
         {/* SUB-CATEGORY HEADINGS ROW (Refer to Screenshot 2) */}
         {/* ========================================== */}
-        <div id="category-sub-header" className="pt-8 border-t border-stone-200/70 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 scroll-mt-24">
+        <div id="category-sub-header" className="pt-8 border-t border-stone-200/50 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 scroll-mt-24">
           <div className="flex items-start gap-2.5">
-            <span className="text-[#db2777] text-2xl shrink-0 leading-none">✦</span>
+            <span className="text-[#db0075] text-2xl shrink-0 leading-none">✦</span>
             <div>
-              <h3 className="text-3xl font-sans text-[#1a1c3d] font-bold leading-none tracking-tight">
+              <h3 className="text-3xl font-sans text-brand-brown font-extrabold leading-none tracking-tight">
                 {getCategoryTitle()}
               </h3>
               <p className="text-sm text-stone-500 font-sans mt-1.5">Explore our finest collection</p>
@@ -158,11 +158,11 @@ export default function CatalogSection({
           </div>
 
           {/* Quick tab filters toggle pills */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-stone-200/40 p-1 rounded-xl">
+          <div className="flex flex-wrap items-center gap-1.5 bg-stone-150 p-1.5 bg-pink-50/45 rounded-xl border border-pink-100/30">
             <button
               onClick={() => setActiveTab('all')}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                activeTab === 'all' ? 'bg-[#db2777] text-white shadow' : 'text-stone-600 hover:text-stone-900'
+                activeTab === 'all' ? 'bg-[#db0075] text-white shadow' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               All Items
@@ -172,7 +172,7 @@ export default function CatalogSection({
                 key={ch.id}
                 onClick={() => setActiveTab(ch.id)}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  activeTab === ch.id ? 'bg-[#db2777] text-white shadow' : 'text-stone-600 hover:text-stone-900'
+                  activeTab === ch.id ? 'bg-[#db0075] text-white shadow' : 'text-stone-600 hover:text-[#db0075]'
                 }`}
               >
                 {ch.label}
@@ -192,11 +192,11 @@ export default function CatalogSection({
               const currentQty = cartItem ? cartItem.quantity : 0;
 
               // Matching tag colors from screenshots
-              let tagColorClass = 'bg-[#db2777] text-white'; // Bestseller Magenta
+              let tagColorClass = 'bg-[#db0075] text-white'; // Bestseller Magenta
               if (product.badgeColor === 'teal') {
                 tagColorClass = 'bg-[#0d9488] text-white'; // New Arrival Teal
               } else if (product.badgeColor === 'gold') {
-                tagColorClass = 'bg-[#c5a85c] text-[#3d2314]'; // Promo Gold
+                tagColorClass = 'bg-pink-100 text-[#1e113a] font-black border border-pink-200'; // Promo brand-pink/plum tag
               }
 
               return (
@@ -236,14 +236,14 @@ export default function CatalogSection({
                       className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-zoom-in"
                     >
                       <span className="flex items-center gap-1 bg-white text-stone-800 rounded-full py-1 px-3 text-[10px] font-bold shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                        <Eye className="w-3 h-3 text-[#db2777]" />
+                        <Eye className="w-3 h-3 text-[#db0075]" />
                         <span>Zoom</span>
                       </span>
                     </div>
 
                     {/* Standard Pink/Teal Round Banner Tag (Screenshot 2) */}
                     {product.badge && (
-                      <span className={`absolute top-2.5 left-2.5 text-[9px] sm:text-[10px] tracking-wide font-extrabold px-2 py-1 rounded-[4.5px] shadow-xs flex items-center gap-0.5 leading-none ${tagColorClass}`}>
+                      <span className={`absolute top-2.5 left-2.5 text-[9px] sm:text-[10px] tracking-wide font-extrabold px-2 py-1 rounded-[4px] shadow-xs flex items-center gap-0.5 leading-none ${tagColorClass}`}>
                         <span className="text-amber-300">★</span>
                         <span className="capitalize">{product.badge}</span>
                       </span>
@@ -265,7 +265,7 @@ export default function CatalogSection({
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-600"></div>
                           </div>
                         )}
-                        <h4 className="text-[13.5px] sm:text-[16px] font-bold text-[#1a1c3d] tracking-tight group-hover:text-[#db2777] transition-colors line-clamp-2 min-h-[38px] sm:min-h-[44px] leading-snug">
+                        <h4 className="text-[13.5px] sm:text-[16px] font-bold text-brand-brown tracking-tight group-hover:text-[#db0075] transition-colors line-clamp-2 min-h-[38px] sm:min-h-[44px] leading-snug">
                           {product.name}
                         </h4>
                       </div>
@@ -280,7 +280,7 @@ export default function CatalogSection({
                     <div className="mt-3 pt-2.5 border-t border-stone-100 flex items-center justify-between">
                       {/* Price column on Left (Large highlighted fuchsia text) */}
                       <div className="flex flex-col">
-                        <span className="text-[15px] sm:text-[18px] font-bold text-[#db2777] font-sans">
+                        <span className="text-[15px] sm:text-[18px] font-bold text-[#db0075] font-sans">
                           ₹{product.price}
                         </span>
                       </div>
@@ -297,7 +297,7 @@ export default function CatalogSection({
                               onClick={() => {
                                 onAddToCart(product);
                               }}
-                              className="w-full h-[26px] sm:h-[30px] bg-[#db2777] hover:bg-pink-700 text-white font-extrabold rounded-md sm:rounded-lg text-xs tracking-wider transition-all cursor-pointer flex items-center justify-center shadow-xs"
+                              className="w-full h-[26px] sm:h-[30px] bg-[#db0075] hover:bg-[#df006c] text-white font-extrabold rounded-md sm:rounded-lg text-xs tracking-wider transition-all cursor-pointer flex items-center justify-center shadow-xs"
                             >
                               Add
                             </motion.button>
@@ -307,7 +307,7 @@ export default function CatalogSection({
                               initial={{ scale: 0.92, opacity: 0 }}
                               animate={{ scale: 1, opacity: 1 }}
                               exit={{ scale: 0.92, opacity: 0 }}
-                              className="flex items-center justify-between w-full bg-[#db2777] text-white px-1.5 h-[26px] sm:h-[30px] rounded-md sm:rounded-lg text-xs font-bold shadow-xs"
+                              className="flex items-center justify-between w-full bg-[#db0075] text-white px-1.5 h-[26px] sm:h-[30px] rounded-md sm:rounded-lg text-xs font-bold shadow-xs"
                             >
                               <button
                                 onClick={() => onUpdateQuantity(product.id, currentQty - 1)}
@@ -342,11 +342,11 @@ export default function CatalogSection({
         </div>
 
         {/* Outer instructions card */}
-        <div className="mt-14 max-w-4xl mx-auto rounded-2xl p-6 border-l-4 border-brand-teal bg-white shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 max-w-4xl mx-auto rounded-3xl p-6 border-l-4 border-[#db0075] bg-pink-50/10 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex gap-3">
             <span className="text-xl">🍪</span>
             <div>
-              <h5 className="text-xs uppercase tracking-widest font-extrabold text-[#3d2314]">Custom Portion Ordering?</h5>
+              <h5 className="text-xs uppercase tracking-widest font-extrabold text-brand-brown">Custom Portion Ordering?</h5>
               <p className="text-[11px] text-stone-500 leading-normal mt-0.5">We cater to larger 1kg/2kg structures, egged versions, corporate logos, and customized cupcakes themes. Write to email: <strong className="text-brand-pink underline">vaishalisarang1985@gmail.com</strong>.</p>
             </div>
           </div>
@@ -354,7 +354,7 @@ export default function CatalogSection({
             href="https://wa.me/919892047995"
             target="_blank"
             rel="noreferrer"
-            className="whitespace-nowrap inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#0d9488] hover:bg-emerald-700 py-2.5 px-4 rounded-xl shadow-sm cursor-pointer"
+            className="whitespace-nowrap inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 py-3 px-5 rounded-full shadow-sm cursor-pointer"
           >
             <MessageCircle className="w-3.5 h-3.5" />
             <span>Discuss Custom Themes</span>

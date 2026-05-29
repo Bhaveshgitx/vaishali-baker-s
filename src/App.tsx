@@ -103,26 +103,26 @@ export default function App() {
   const cartTotalPrice = cart.reduce((acc, current) => acc + (current.price * current.quantity), 0);
 
   return (
-    <div className="min-h-screen bg-[#faf7f2] font-sans selection:bg-[#c5a85c]/30 selection:text-[#3d2314] overflow-x-hidden">
+    <div className="min-h-screen bg-white font-sans selection:bg-pink-100 selection:text-pink-700 overflow-x-hidden">
       
       {/* 1. Thin Info Top Bar */}
       <QuickHeader />
 
       {/* 2. Main Navigation Bar */}
-      <nav className="bg-[#FAF7F2]/90 backdrop-blur-md sticky top-0 sm:top-auto border-b border-[#c5a85c]/10 z-30 transition-all select-none">
+      <nav className="bg-white/90 backdrop-blur-md sticky top-0 sm:top-auto border-b border-pink-100 z-30 transition-all select-none shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           
-          {/* Logo Name */}
+          {/* Logo Name reminiscent of Monginis pink-themed bold font */}
           <div 
             onClick={() => scrollToSection('hero-section')}
             className="flex items-center gap-2 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-full bg-[#3d2314] text-[#c5a85c] flex items-center justify-center shadow-md group-hover:bg-[#c5a85c] group-hover:text-[#3d2314] transition-colors duration-300">
+            <div className="w-10 h-10 rounded-full bg-pink-100 text-[#db0075] flex items-center justify-center shadow-inner group-hover:bg-[#db0075] group-hover:text-white transition-colors duration-300">
               <ChefHat className="w-5 h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-xl font-black text-[#3d2314] tracking-tight">Vaishali Bakers</span>
-              <span className="text-[9px] uppercase tracking-widest text-[#c5a85c] font-black leading-none">Artisanal Bakery</span>
+              <span className="font-sans text-xl font-extrabold text-[#db0075] tracking-tight">vaishali <span className="text-brand-brown">bakers</span></span>
+              <span className="text-[9px] uppercase tracking-widest text-[#db0075] font-black leading-none">Freshly Baked Happiness</span>
             </div>
           </div>
 
@@ -130,31 +130,31 @@ export default function App() {
           <div className="hidden md:flex items-center gap-6">
             <button
               onClick={() => scrollToSection('hero-section')}
-              className="text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection('catalog-section')}
-              className="text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Our Menu
             </button>
             <button
               onClick={() => scrollToSection('bulk-section')}
-              className="text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Bulk Orders
             </button>
             <button
               onClick={() => scrollToSection('delivery-section')}
-              className="text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Delivery Zones
             </button>
             <button
               onClick={() => scrollToSection('contact-section')}
-              className="text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer font-serif italic"
+              className="text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer font-serif italic"
             >
               Reach Us ✦
             </button>
@@ -166,12 +166,12 @@ export default function App() {
             {/* Visual Header Basket Button with Pulsing Dot */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="relative p-2.5 rounded-full bg-[#3d2314] text-[#faf7f2] hover:bg-brand-pink border border-[#c5a85c]/30 hover:border-transparent transition-all cursor-pointer shadow-md"
+              className="relative p-2.5 rounded-full bg-pink-550 hover:bg-[#db0075]/10 bg-slate-50 border border-pink-200 text-[#db0075] hover:text-[#db0075] transition-all cursor-pointer shadow-sm"
               aria-label="View shopping basket"
             >
-              <ShoppingCart className="w-4 h-4 text-[#c5a85c]" />
+              <ShoppingCart className="w-4 h-4 text-[#db0075]" />
               {totalItemsCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-brand-pink text-[#faf7f2] text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#faf7f2] animate-pulse">
+                <span className="absolute -top-1.5 -right-1.5 bg-[#db0075] text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white animate-pulse">
                   {totalItemsCount}
                 </span>
               )}
@@ -180,7 +180,7 @@ export default function App() {
             {/* Call to action button on desktop */}
             <button
               onClick={() => scrollToSection('bulk-section')}
-              className="hidden md:flex bg-pink-600 hover:bg-pink-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow-md hover:-translate-y-0.5 transition-all items-center gap-1.5 cursor-pointer"
+              className="hidden md:flex bg-[#db0075] hover:bg-[#df006c] text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow-md hover:-translate-y-0.5 transition-all items-center gap-1.5 cursor-pointer"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>Bulk order deal</span>
@@ -189,7 +189,7 @@ export default function App() {
             {/* Hamburger Menu on Mobile view */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#3d2314] hover:text-pink-600 md:hidden transition-colors"
+              className="p-2 text-brand-brown hover:text-[#db0075] md:hidden transition-colors"
               aria-label="Toggle Mobile Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -202,31 +202,31 @@ export default function App() {
           <div className="md:hidden bg-white border-b border-stone-200 py-4 px-4 shadow-xl space-y-3">
             <button
               onClick={() => scrollToSection('hero-section')}
-              className="block w-full text-left py-2 text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="block w-full text-left py-2 text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection('catalog-section')}
-              className="block w-full text-left py-2 text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="block w-full text-left py-2 text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Our Menu
             </button>
             <button
               onClick={() => scrollToSection('bulk-section')}
-              className="block w-full text-left py-2 text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="block w-full text-left py-2 text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Bulk Orders & Calculator
             </button>
             <button
               onClick={() => scrollToSection('delivery-section')}
-              className="block w-full text-left py-2 text-sm font-semibold text-[#3d2314] hover:text-pink-600 transition-colors cursor-pointer"
+              className="block w-full text-left py-2 text-sm font-semibold text-brand-brown hover:text-[#db0075] transition-colors cursor-pointer"
             >
               Delivery Coverage
             </button>
             <button
               onClick={() => scrollToSection('contact-section')}
-              className="block w-full text-left py-2 text-sm font-bold text-pink-600 transition-colors cursor-pointer"
+              className="block w-full text-left py-2 text-sm font-bold text-[#db0075] transition-colors cursor-pointer"
             >
               Reach Us / Kanjurmarg Location
             </button>
@@ -280,9 +280,9 @@ export default function App() {
         <div className="fixed bottom-24 sm:bottom-6 left-6 z-50 animate-bounce select-none">
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="flex items-center gap-2 bg-[#db2777] text-white font-extrabold px-4.5 py-3.5 rounded-2xl shadow-2xl hover:bg-pink-700 transition-all border border-pink-400/20 text-xs uppercase tracking-wider cursor-pointer font-sans"
+            className="flex items-center gap-2 bg-[#db0075] text-white font-extrabold px-4.5 py-3.5 rounded-2xl shadow-2xl hover:bg-[#df006c] transition-all border border-pink-400/20 text-xs uppercase tracking-wider cursor-pointer font-sans"
           >
-            <ShoppingCart className="w-4.5 h-4.5 text-[#c5a85c]" />
+            <ShoppingCart className="w-4.5 h-4.5 text-white" />
             <span>📋 Basket ({totalItemsCount} Treats) — ₹{cartTotalPrice}</span>
           </button>
         </div>

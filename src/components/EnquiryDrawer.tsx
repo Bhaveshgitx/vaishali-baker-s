@@ -93,14 +93,14 @@ Can you please confirm ingredient availability, customized icing options, and de
             >
               
               {/* Header Box */}
-              <div className="bg-[#3d2314] text-white px-5 py-5 border-b border-[#c5a85c]/30 flex items-center justify-between shadow-md">
+              <div className="bg-brand-brown text-white px-5 py-5 border-b border-pink-500/10 flex items-center justify-between shadow-md font-sans">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-[#c5a85c]/20 text-[#c5a85c] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-pink-100 text-[#db0075] flex items-center justify-center shrink-0">
                     <ShoppingBag className="w-4 h-4" />
                   </div>
                   <div>
                     <h3 className="text-base font-serif font-black tracking-tight text-white leading-none">My Enquiry Basket</h3>
-                    <span className="text-[10px] text-gray-300 font-sans tracking-wide mt-1 block">
+                    <span className="text-[10px] text-pink-200/80 font-sans tracking-wide mt-1 block">
                       {totalItems} item{totalItems !== 1 && 's'} selected
                     </span>
                   </div>
@@ -110,7 +110,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                   {totalItems > 0 && (
                     <button
                       onClick={onClearCart}
-                      className="text-xs text-stone-300 hover:text-red-400 font-bold transition-colors uppercase tracking-wider flex items-center gap-1 cursor-pointer"
+                      className="text-xs text-pink-200 hover:text-red-400 font-bold transition-colors uppercase tracking-wider flex items-center gap-1 cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                       <span>Clear</span>
@@ -133,13 +133,13 @@ Can you please confirm ingredient availability, customized icing options, and de
                     <div className="w-20 h-20 rounded-full bg-pink-50 border border-pink-100 flex items-center justify-center text-3xl mb-4 animate-bounce">
                       🧁
                     </div>
-                    <h4 className="font-serif font-bold text-lg text-[#3d2314]">Empty Enquiry Basket</h4>
-                    <p className="text-xs text-gray-500 max-w-xs mt-2 leading-relaxed font-light">
+                    <h4 className="font-serif font-bold text-lg text-brand-brown">Empty Enquiry Basket</h4>
+                    <p className="text-xs text-stone-500 max-w-xs mt-2 leading-relaxed font-light">
                       Browse our digital menu under Cakes, New Launches, or Pastries and click "Add" to select customized treats for your celebration timeline!
                     </p>
                     <button
                       onClick={onClose}
-                      className="mt-6 px-5 py-2.5 bg-[#3d2314] hover:bg-brand-pink text-white rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer uppercase tracking-wider"
+                      className="mt-6 px-5 py-2.5 bg-[#db0075] hover:bg-[#df006c] text-white rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer uppercase tracking-wider"
                     >
                       Explore Delicacies
                     </button>
@@ -154,7 +154,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                     {cart.map((item) => (
                       <div
                         key={item.id}
-                        className="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col gap-3 relative hover:border-brand-pink/30 transition-all group"
+                        className="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs flex flex-col gap-3 relative hover:border-brand-pink/30 transition-all group font-sans"
                       >
                         {/* Top Line details */}
                         <div className="flex items-start gap-3">
@@ -165,11 +165,11 @@ Can you please confirm ingredient availability, customized icing options, and de
                             referrerPolicy="no-referrer"
                           />
                           <div className="flex-1 min-w-0">
-                            <h5 className="text-[13px] font-bold text-[#3d2314] truncate leading-tight group-hover:text-brand-pink transition-colors">
+                            <h5 className="text-[13px] font-bold text-brand-brown truncate leading-tight group-hover:text-[#db0075] transition-colors">
                               {item.name}
                             </h5>
                             <div className="flex items-center gap-1.5 mt-1 text-[11px]">
-                              <span className="text-stone-500 font-mono">₹{item.price}</span>
+                              <span className="text-stone-500 font-mono font-semibold">₹{item.price}</span>
                               <span className="text-stone-300">/</span>
                               <span className="text-stone-400 lowercase">{item.unit}</span>
                             </div>
@@ -189,7 +189,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                           
                           {/* 100% Eggless Option Toggle Checker */}
                           <div className="flex items-center justify-between text-[11px]">
-                            <label htmlFor={`eggless-${item.id}`} className="flex items-center gap-1.5 font-semibold text-stone-600 cursor-pointer select-none">
+                            <label htmlFor={`eggless-${item.id}`} className="flex items-center gap-1.5 font-semibold text-stone-605 cursor-pointer select-none">
                               <span className="border border-emerald-600 rounded-[2px] w-3 h-3 flex items-center justify-center shrink-0">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                               </span>
@@ -200,7 +200,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                               id={`eggless-${item.id}`}
                               checked={item.isEggless}
                               onChange={(e) => onUpdateEggless(item.id, e.target.checked)}
-                              className="accent-emerald-600 rounded cursor-pointer w-3.5 h-3.5"
+                              className="accent-emerald-650 rounded cursor-pointer w-3.5 h-3.5"
                             />
                           </div>
 
@@ -208,7 +208,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                           {item.category === 'cakes' && (
                             <div className="pt-2 border-t border-stone-200/50">
                               <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider flex items-center gap-1">
-                                <PenTool className="w-3 h-3 text-[#c5a85c]" />
+                                <PenTool className="w-3 h-3 text-[#db0075]" />
                                 <span>Message to write on Cake</span>
                               </label>
                               <input
@@ -216,7 +216,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                                 placeholder='e.g., "Happy Birthday Nilesh! 🎂"'
                                 value={item.customText || ''}
                                 onChange={(e) => onUpdateCustomText(item.id, e.target.value)}
-                                className="w-full text-xs bg-white border border-stone-200 rounded-lg py-1.5 px-2.5 mt-1 focus:outline-none focus:border-brand-pink text-[#3d2314] placeholder-stone-400"
+                                className="w-full text-xs bg-white border border-stone-200 rounded-lg py-1.5 px-2.5 mt-1 focus:outline-none focus:border-brand-pink text-brand-brown placeholder-stone-450"
                               />
                             </div>
                           )}
@@ -232,15 +232,15 @@ Can you please confirm ingredient availability, customized icing options, and de
                           <div className="flex items-center gap-2.5 bg-stone-100 px-2 py-1 rounded-xl">
                             <button
                               onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                              className="p-1 rounded text-[#3d2314] hover:bg-stone-200 transition-colors cursor-pointer"
+                              className="p-1 rounded text-brand-brown hover:bg-stone-200 transition-colors cursor-pointer"
                               aria-label="Reduce"
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="w-5 text-center text-xs font-black font-mono text-[#3d2314]">{item.quantity}</span>
+                            <span className="w-5 text-center text-xs font-black font-mono text-brand-brown">{item.quantity}</span>
                             <button
                               onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                              className="p-1 rounded text-[#3d2314] hover:bg-stone-200 transition-colors cursor-pointer"
+                              className="p-1 rounded text-brand-brown hover:bg-stone-200 transition-colors cursor-pointer"
                               aria-label="Increase"
                             >
                               <Plus className="w-3 h-3" />
@@ -252,7 +252,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                     ))}
 
                     {/* Progress to free shipping inside drawer */}
-                    <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm text-xs">
+                    <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm text-xs font-sans">
                       {freeShippingUnlocked ? (
                         <div className="flex items-start gap-2.5 text-emerald-800">
                           <span className="text-base leading-none">🚚</span>
@@ -263,10 +263,10 @@ Can you please confirm ingredient availability, customized icing options, and de
                         </div>
                       ) : (
                         <div>
-                          <p className="font-bold text-amber-800">Add {50 - totalItems} more units for FREE insulated transit delivery.</p>
-                          <div className="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden mt-1.5 border border-stone-200">
+                          <p className="font-bold text-pink-900">Add <span className="font-mono text-xs font-bold text-[#db0075] underline underline-offset-2">{50 - totalItems}</span> more units for FREE insulated transit delivery.</p>
+                          <div className="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden mt-1.5 border border-stone-250">
                             <div
-                              className="bg-[#c5a85c] h-full transition-all duration-300"
+                              className="bg-[#db0075] h-full transition-all duration-300"
                               style={{ width: `${(totalItems / 50) * 100}%` }}
                             ></div>
                           </div>
@@ -278,7 +278,7 @@ Can you please confirm ingredient availability, customized icing options, and de
               </div>
 
               {/* Drawer Bottom Checkout Calculator Panel */}
-              <div className="bg-stone-50 p-5 border-t border-stone-200">
+              <div className="bg-stone-50 p-5 border-t border-stone-200 font-sans">
                 <div className="space-y-2 mb-5">
                   <div className="flex justify-between text-xs text-stone-500">
                     <span>Base Cakes/Treats Sum</span>
@@ -286,7 +286,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                   </div>
 
                   {discountAmount > 0 && (
-                    <div className="flex justify-between text-xs text-emerald-600 font-semibold">
+                    <div className="flex justify-between text-xs text-[#db0075] font-semibold">
                       <span>Applied Bulk Discount ({discountPercentage}%)</span>
                       <span className="font-mono">-₹{discountAmount}</span>
                     </div>
@@ -304,8 +304,8 @@ Can you please confirm ingredient availability, customized icing options, and de
                   <div className="h-[1px] bg-stone-200 my-2"></div>
 
                   <div className="flex justify-between text-sm">
-                    <span className="font-bold text-[#3d2314]">Estimated Net Price:</span>
-                    <span className="font-black font-mono text-[17px] text-brand-pink">
+                    <span className="font-bold text-brand-brown">Estimated Net Price:</span>
+                    <span className="font-black font-mono text-[17px] text-[#db0075]">
                       ₹{finalPrice}
                     </span>
                   </div>
@@ -321,7 +321,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                       : 'bg-emerald-600 hover:bg-emerald-700 hover:shadow-lg'
                   }`}
                 >
-                  <MessageCircle className="w-4 h-4 text-[#c5a85c]" />
+                  <MessageCircle className="w-4 h-4 text-white" />
                   <span>Send Enquiry on WhatsApp</span>
                 </button>
 

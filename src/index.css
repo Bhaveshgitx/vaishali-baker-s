@@ -7,22 +7,22 @@
   --font-serif: "Playfair Display", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Specific theme colors for Vaishali Bakers */
-  --color-brand-brown: #3d2314;     /* Deep Rich Chocolate Brown */
-  --color-brand-cream: #faf7f2;     /* Antique Soft Cream */
-  --color-brand-gold: #c5a85c;      /* Soft Warm Gold Accent */
-  --color-brand-pink: #db2777;      /* Warm Pink Accents */
-  --color-brand-teal: #0d9488;      /* Warm Teal Accents */
+  /* Custom Monginis-inspired palette for Vaishali Bakers */
+  --color-brand-brown: #1e113a;     /* Deep Royal Indigo-Violet / Plum Plum (Headings) */
+  --color-brand-cream: #ffffff;     /* Pure Clean White */
+  --color-brand-gold: #db0075;      /* Vibrant Monginis Pink Magenta */
+  --color-brand-pink: #db0075;      /* Vibrant Monginis Pink Magenta */
+  --color-brand-teal: #10b981;      /* Emerald Green for Veg Indicators and Badges */
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #faf7f2;
+  background-color: #ffffff;
 }
 
 body {
   font-family: var(--font-sans);
-  color: #3d2314;
+  color: #1e113a;
 }
 
 /* Custom elegant scrollbar */
@@ -33,9 +33,9 @@ body {
   background: #faf7f2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c5a85c;
+  background: #db0075;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3d2314;
+  background: #1e113a;
 }
