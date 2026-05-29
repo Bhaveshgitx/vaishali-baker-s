@@ -55,25 +55,9 @@ export default function DeliveryZones() {
                   <h3 className="text-lg font-bold text-brand-brown font-serif">{zone.name}</h3>
                 </div>
 
-                <p className="text-xs text-stone-600 mb-5 leading-relaxed font-light font-sans">
+                <p className="text-xs text-stone-600 leading-relaxed font-light font-sans">
                   {zone.description}
                 </p>
-
-                {/* Targeted Key Localities */}
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider uppercase text-gray-400 block mb-2">Prime Service Areas</span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {zone.areas.map((area) => (
-                      <span
-                        key={area}
-                        className="bg-white text-stone-700 text-xs px-2.5 py-1 rounded-md border border-stone-200/50 flex items-center gap-1 font-medium"
-                      >
-                        <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`}></span>
-                        <span>{area}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
             );
           })}

@@ -27,18 +27,6 @@ export default function EnquiryDrawer({
 }: EnquiryDrawerProps) {
   
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-
-  // Auto bulk discounts
-  let discountPercentage = 0;
-  if (totalItems >= 150) {
-    discountPercentage = 10;
-  } else if (totalItems >= 100) {
-    discountPercentage = 5;
-  }
-
-  const discountAmount = Math.round((totalPrice * discountPercentage) / 100);
-  const finalPrice = totalPrice - discountAmount;
   const freeShippingUnlocked = totalItems >= 50;
 
   // Compile detailed WhatsApp Message containing lists, custom messages and calculations
@@ -51,19 +39,17 @@ export default function EnquiryDrawer({
     cart.forEach((item, idx) => {
       const egglessTag = item.isEggless ? ' [100% Eggless Option]' : '';
       const customTxtTag = item.customText ? `\n   ↳ Custom message on cake: "${item.customText}"` : '';
-      messageText += `\n${idx + 1}. ${item.name} (${item.quantity} unidades)${egglessTag}${customTxtTag}`;
+      messageText += `\n${idx + 1}. ${item.name} (${item.quantity} units)${egglessTag}${customTxtTag}`;
     });
 
     messageText += `
 
-💰 TOTAL CALCULATED PORTION DETAILS:
-• Number of items: ${totalItems} units
-• Base total: ₹${totalPrice}
-• Applied Bulk discount: ${discountPercentage > 0 ? `${discountPercentage}% (-₹${discountAmount})` : 'None (add 100+ items for 5% off)'}
-• Estimated net total: ₹${finalPrice}
+📦 TOTAL ENQUIRY SPECIFICATIONS:
+• Total Selected Items: ${totalItems} units
+• Base Portion Units: Checked against catalog
 • Delivery: ${freeShippingUnlocked ? 'Complimentary Delivery Unlocked (50+ units)!' : 'Standard Area Delivery required'}
 
-Can you please confirm ingredient availability, customized icing options, and delivery slot on my requested dates? Thank you!`;
+Can you please confirm the custom pricing, ingredient availability, customized icing options, and delivery slot on my requested dates? Thank you!`;
 
     const encodedText = encodeURIComponent(messageText);
     window.open(`https://wa.me/919892047995?text=${encodedText}`, '_blank');
@@ -135,7 +121,7 @@ Can you please confirm ingredient availability, customized icing options, and de
                     </div>
                     <h4 className="font-serif font-bold text-lg text-brand-brown">Empty Enquiry Basket</h4>
                     <p className="text-xs text-stone-500 max-w-xs mt-2 leading-relaxed font-light">
-                      Browse our digital menu under Cakes, New Launches, or Pastries and click "Add" to select customized treats for your celebration timeline!
+                      Browse our digital menu under Cakes, Brownies, or Cupcakes and click "Add" to select customized treats for your celebration timeline!
                     </p>
                     <button
                       onClick={onClose}
@@ -168,11 +154,6 @@ Can you please confirm ingredient availability, customized icing options, and de
                             <h5 className="text-[13px] font-bold text-brand-brown truncate leading-tight group-hover:text-[#db0075] transition-colors">
                               {item.name}
                             </h5>
-                            <div className="flex items-center gap-1.5 mt-1 text-[11px]">
-                              <span className="text-stone-500 font-mono font-semibold">₹{item.price}</span>
-                              <span className="text-stone-300">/</span>
-                              <span className="text-stone-400 lowercase">{item.unit}</span>
-                            </div>
                           </div>
 
                           <button
@@ -225,8 +206,8 @@ Can you please confirm ingredient availability, customized icing options, and de
 
                         {/* Bottom slider layout */}
                         <div className="flex items-center justify-between pt-1">
-                          <span className="text-[11px] font-bold text-stone-400 uppercase tracking-widest font-mono">
-                            Subtotal: ₹{item.price * item.quantity}
+                          <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">
+                            Select Units:
                           </span>
 
                           <div className="flex items-center gap-2.5 bg-stone-100 px-2 py-1 rounded-xl">
@@ -281,33 +262,26 @@ Can you please confirm ingredient availability, customized icing options, and de
               <div className="bg-stone-50 p-5 border-t border-stone-200 font-sans">
                 <div className="space-y-2 mb-5">
                   <div className="flex justify-between text-xs text-stone-500">
-                    <span>Base Cakes/Treats Sum</span>
-                    <span className="font-mono">₹{totalPrice}</span>
+                    <span>Total Selected Units</span>
+                    <span className="font-mono font-bold text-brand-brown">{totalItems} units</span>
                   </div>
-
-                  {discountAmount > 0 && (
-                    <div className="flex justify-between text-xs text-[#db0075] font-semibold">
-                      <span>Applied Bulk Discount ({discountPercentage}%)</span>
-                      <span className="font-mono">-₹{discountAmount}</span>
-                    </div>
-                  )}
 
                   <div className="flex justify-between text-xs text-stone-500">
                     <span>Insulated Local Delivery</span>
                     {freeShippingUnlocked ? (
-                      <span className="text-emerald-600 font-bold uppercase text-[10px]">FREE</span>
+                      <span className="text-emerald-600 font-bold uppercase text-[10px]">Complimentary Delivery</span>
                     ) : (
-                      <span className="italic text-stone-400">calculated on check-in</span>
+                      <span className="italic text-stone-405 font-medium">Standard Area rate</span>
                     )}
                   </div>
 
                   <div className="h-[1px] bg-stone-200 my-2"></div>
 
-                  <div className="flex justify-between text-sm">
-                    <span className="font-bold text-brand-brown">Estimated Net Price:</span>
-                    <span className="font-black font-mono text-[17px] text-[#db0075]">
-                      ₹{finalPrice}
-                    </span>
+                  <div className="flex flex-col gap-0.5 text-left text-xs text-[#db0075] bg-pink-50/40 p-2.5 rounded-lg border border-pink-100/40">
+                    <span className="font-extrabold uppercase text-[9px] tracking-wider">Custom Quote Inquiry</span>
+                    <p className="text-[11px] leading-relaxed font-medium text-stone-600">
+                      Prices are removed for custom home baking. Nilesh & Vaishali will confirm your custom request & ingredients over WhatsApp directly!
+                    </p>
                   </div>
                 </div>
 

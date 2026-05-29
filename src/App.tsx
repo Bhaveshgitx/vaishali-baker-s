@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { ChefHat, ShoppingBag, Menu, X, ShoppingCart } from 'lucide-react';
 import QuickHeader from './components/QuickHeader';
 import HeroSection from './components/HeroSection';
+import logoImg from './assets/images/vaishali_logo_exact_1780074012944.png';
 import BulkPromo from './components/BulkPromo';
 import CatalogSection, { CartItem } from './components/CatalogSection';
+import TestimonialsSection from './components/TestimonialsSection';
 import DeliveryZones from './components/DeliveryZones';
 import FooterReachUs from './components/FooterReachUs';
 import {
   ImageLightbox,
   FloatingWhatsAppButton,
-  MobileStickyDialPhone,
 } from './components/UXEnhancements';
 import EnquiryDrawer from './components/EnquiryDrawer';
 import { Product } from './data';
@@ -117,8 +118,13 @@ export default function App() {
             onClick={() => scrollToSection('hero-section')}
             className="flex items-center gap-2 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-full bg-pink-100 text-[#db0075] flex items-center justify-center shadow-inner group-hover:bg-[#db0075] group-hover:text-white transition-colors duration-300">
-              <ChefHat className="w-5 h-5" />
+            <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border-2 border-pink-100 shadow-sm transition-transform duration-300 group-hover:scale-105 bg-white">
+              <img 
+                src={logoImg} 
+                alt="Vaishali Bakers Logo" 
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-sans text-xl font-extrabold text-[#db0075] tracking-tight">vaishali <span className="text-brand-brown">bakers</span></span>
@@ -237,10 +243,7 @@ export default function App() {
       {/* 3. Hero Visual Section */}
       <HeroSection />
 
-      {/* 4. Specialized Bulk Order Promo Area */}
-      <BulkPromo />
-
-      {/* 5. Product Digital Catalog with Grid filters */}
+      {/* 4. Product Digital Catalog with Grid filters */}
       <CatalogSection 
         onPhotoClick={openLightbox} 
         cart={cart}
@@ -248,6 +251,12 @@ export default function App() {
         onRemoveFromCart={handleRemoveFromCart}
         onUpdateQuantity={handleUpdateQuantity}
       />
+
+      {/* 5. Specialized Bulk Order Promo Area */}
+      <BulkPromo />
+
+      {/* 5.5 Verified Client Reviews & Testimonials Carousel */}
+      <TestimonialsSection />
 
       {/* 6. Location & Coverage Block */}
       <DeliveryZones />
@@ -283,14 +292,13 @@ export default function App() {
             className="flex items-center gap-2 bg-[#db0075] text-white font-extrabold px-4.5 py-3.5 rounded-2xl shadow-2xl hover:bg-[#df006c] transition-all border border-pink-400/20 text-xs uppercase tracking-wider cursor-pointer font-sans"
           >
             <ShoppingCart className="w-4.5 h-4.5 text-white" />
-            <span>📋 Basket ({totalItemsCount} Treats) — ₹{cartTotalPrice}</span>
+            <span>📋 Basket ({totalItemsCount} Selected Items)</span>
           </button>
         </div>
       )}
 
       {/* 11. Constant UX components */}
       <FloatingWhatsAppButton />
-      <MobileStickyDialPhone />
     </div>
   );
 }

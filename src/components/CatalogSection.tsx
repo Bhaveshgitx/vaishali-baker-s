@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Grid, Eye, MessageCircle, Heart, Plus, Minus, Cake, Sparkles, Award, Coffee } from 'lucide-react';
+import { Grid, Eye, MessageCircle, Heart, Plus, Minus, Cake, Sparkles, Award, Coffee, Share2, X, Copy, Check, Instagram, Send, ExternalLink } from 'lucide-react';
 import { PRODUCTS, Product } from '../data';
 import cakesSpecialImg from '../assets/images/cakes_special_1779797201179.png';
+import browniesSpecialImg from '../assets/images/brownies_special_1779797159768.png';
 import cupcakesSpecialImg from '../assets/images/cupcakes_special_1779797178372.png';
 
 // Custom interface representing a product in the active selection
@@ -33,8 +34,31 @@ export default function CatalogSection({
   onRemoveFromCart,
   onUpdateQuantity
 }: CatalogProps) {
-  const [activeTab, setActiveTab] = useState<'all' | 'cakes' | 'new-launch' | 'pastries' | 'snacks-box'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'cakes' | 'brownies' | 'chocolate-cupcakes' | 'vanilla-cupcakes'>('all');
   const catalogListRef = useRef<HTMLDivElement>(null);
+
+  const [shareProduct, setShareProduct] = useState<Product | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+
+  const handleShareWhatsApp = (product: Product) => {
+    const text = `✨ *Deliciousness from Vaishali Bakers!* 🧁✨\n\nCheckout *${product.name}*!\n\n"${product.description}"\n\n🎂 100% pure vegetarian (eggless) and freshly baked for your matches & events!\n\n👉 View more or order here: ${window.location.href}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const handleCopyInstagram = (product: Product) => {
+    const text = `🧁 Vaishali Bakers - ${product.name}\n\n"${product.description}"\n\n🎂 Pure eggless premium delights baked with love in Kanjurmarg, Mumbai!\n\n👉 Order yours now! ${window.location.origin}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyLink = (product: Product) => {
+    const link = `${window.location.origin}/#product-${product.id}`;
+    navigator.clipboard.writeText(link);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
 
   // Filter products based on activeTab
   const filteredProducts = PRODUCTS.filter(
@@ -42,7 +66,7 @@ export default function CatalogSection({
   );
 
   // Handle category category card selection with smooth scrolling
-  const selectCategory = (category: 'all' | 'cakes' | 'new-launch' | 'pastries' | 'snacks-box') => {
+  const selectCategory = (category: 'all' | 'cakes' | 'brownies' | 'chocolate-cupcakes' | 'vanilla-cupcakes') => {
     setActiveTab(category);
     setTimeout(() => {
       const headerElement = document.getElementById('category-sub-header');
@@ -62,35 +86,35 @@ export default function CatalogSection({
       caption: 'Fresh Customised celebration cakes'
     },
     {
-      id: 'new-launch' as const,
-      label: 'New Launch',
-      labelColor: 'text-brand-brown font-semibold',
-      image: 'https://images.unsplash.com/photo-1603532648955-039310d9ed75?auto=format&fit=crop&q=80&w=300',
-      caption: 'Fresh Nutella & Biscoff arrivals'
+      id: 'brownies' as const,
+      label: 'Brownies',
+      labelColor: 'text-brand-brown font-bold',
+      image: browniesSpecialImg,
+      caption: 'Fresh baked fudgy brownies'
     },
     {
-      id: 'pastries' as const,
-      label: 'Pastries',
-      labelColor: 'text-brand-brown font-semibold',
-      image: 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=300',
-      caption: 'Handy individual mousse slices'
-    },
-    {
-      id: 'snacks-box' as const,
-      label: 'Snacks Box',
-      labelColor: 'text-brand-brown font-semibold',
+      id: 'chocolate-cupcakes' as const,
+      label: 'Chocolate Cupcakes',
+      labelColor: 'text-[#db0075] font-bold',
       image: cupcakesSpecialImg,
-      caption: 'Premium gifting combos & cupcakes'
+      caption: 'Fluffy custom iced chocolate cupcakes'
+    },
+    {
+      id: 'vanilla-cupcakes' as const,
+      label: 'Vanilla sponge cupcakes',
+      labelColor: 'text-stone-700 font-bold',
+      image: 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=300',
+      caption: 'Classic soft vanilla sponge cupcakes'
     }
   ];
 
   // Map category helper tags to aesthetic sparkles matching image
   const getCategoryTitle = () => {
     switch (activeTab) {
-      case 'cakes': return 'Cakes';
-      case 'new-launch': return 'New Launch';
-      case 'pastries': return 'Pastries';
-      case 'snacks-box': return 'Snacks Box';
+      case 'cakes': return 'Custom Celebration Cakes';
+      case 'brownies': return 'Fresh Fudgy Brownies';
+      case 'chocolate-cupcakes': return 'Chocolate Cupcakes';
+      case 'vanilla-cupcakes': return 'Vanilla Sponge Cupcakes';
       default: return 'Our Complete Menu List';
     }
   };
@@ -118,11 +142,11 @@ export default function CatalogSection({
                   whileHover={{ y: -6, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => selectCategory(cat.id)}
-                  className={`bg-white rounded-[2rem] p-3 shadow-xs hover:shadow-md transition-all cursor-pointer border-2 ${
+                  className={`bg-white rounded-[2rem] p-3 shadow-xs hover:shadow-md transition-all cursor-pointer border-2 w-full ${
                     works ? 'border-brand-pink shadow-pink-100 bg-pink-50/10' : 'border-stone-50'
                   }`}
                 >
-                  <div className="relative aspect-square w-full rounded-[1.6rem] overflow-hidden bg-stone-55 overflow-hidden shadow-inner">
+                  <div className="relative aspect-square w-full rounded-[1.6rem] overflow-hidden bg-stone-55 shadow-inner">
                     <img
                       src={cat.image}
                       alt={cat.label}
@@ -133,7 +157,7 @@ export default function CatalogSection({
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/10 to-transparent"></div>
                   </div>
                   <div className="text-center pt-3 pb-1">
-                    <span className={`text-[15px] block font-sans font-extrabold tracking-tight leading-none ${cat.labelColor}`}>
+                    <span className={`text-[13px] sm:text-[15px] block font-sans font-extrabold tracking-tight leading-none ${cat.labelColor}`}>
                       {cat.label}
                     </span>
                   </div>
@@ -150,7 +174,7 @@ export default function CatalogSection({
           <div className="flex items-start gap-2.5">
             <span className="text-[#db0075] text-2xl shrink-0 leading-none">✦</span>
             <div>
-              <h3 className="text-3xl font-sans text-brand-brown font-extrabold leading-none tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-sans text-brand-brown font-extrabold leading-none tracking-tight">
                 {getCategoryTitle()}
               </h3>
               <p className="text-sm text-stone-500 font-sans mt-1.5">Explore our finest collection</p>
@@ -158,11 +182,11 @@ export default function CatalogSection({
           </div>
 
           {/* Quick tab filters toggle pills */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-stone-150 p-1.5 bg-pink-50/45 rounded-xl border border-pink-100/30">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-pink-50/40 rounded-xl border border-pink-100/20 max-w-full overflow-x-auto">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                activeTab === 'all' ? 'bg-[#db0075] text-white shadow' : 'text-stone-600 hover:text-stone-900'
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                activeTab === 'all' ? 'bg-[#db0075] text-white shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               All Items
@@ -171,8 +195,8 @@ export default function CatalogSection({
               <button
                 key={ch.id}
                 onClick={() => setActiveTab(ch.id)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  activeTab === ch.id ? 'bg-[#db0075] text-white shadow' : 'text-stone-600 hover:text-[#db0075]'
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  activeTab === ch.id ? 'bg-[#db0075] text-white shadow-xs' : 'text-stone-600 hover:text-[#db0075]'
                 }`}
               >
                 {ch.label}
@@ -249,10 +273,19 @@ export default function CatalogSection({
                       </span>
                     )}
 
-                    {/* Weight portion helper text overlay */}
-                    <span className="absolute bottom-2.5 right-2.5 bg-stone-900/75 backdrop-blur-xs text-white px-2 py-0.5 rounded-[4px] text-[9px] font-bold tracking-wider">
-                      {product.unit}
-                    </span>
+                    {/* Share Button on Card Image */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShareProduct(product);
+                      }}
+                      className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs shadow-xs hover:shadow-md border border-stone-200/40 flex items-center justify-center text-[#db0075] sm:text-stone-600 hover:text-[#db0075] hover:scale-110 active:scale-95 transition-all cursor-pointer z-10"
+                      title={`Share ${product.name}`}
+                      aria-label="Share product on social media"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
 
                   {/* Body textual content */}
@@ -278,11 +311,10 @@ export default function CatalogSection({
 
                     {/* Bottom Order Action Box - Styled directly to match second screenshot */}
                     <div className="mt-3 pt-2.5 border-t border-stone-100 flex items-center justify-between">
-                      {/* Price column on Left (Large highlighted fuchsia text) */}
-                      <div className="flex flex-col">
-                        <span className="text-[15px] sm:text-[18px] font-bold text-[#db0075] font-sans">
-                          ₹{product.price}
-                        </span>
+                      {/* Left: Size options for ordering */}
+                      <div className="flex flex-col text-left">
+                        <span className="text-[9px] uppercase tracking-wider text-stone-400 font-extrabold">Standard Size</span>
+                        <span className="text-[11px] font-bold text-stone-600 whitespace-nowrap">{product.unit}</span>
                       </div>
 
                       {/* Dynamic Morphing Swiggy Button on Right */}
@@ -360,6 +392,151 @@ export default function CatalogSection({
             <span>Discuss Custom Themes</span>
           </a>
         </div>
+
+        {/* ========================================== */}
+        {/* INTERACTIVE SOCIAL SHARE MODAL */}
+        {/* ========================================== */}
+        <AnimatePresence>
+          {shareProduct && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShareProduct(null)}
+                className="fixed inset-0 bg-stone-900/60 backdrop-blur-xs cursor-pointer z-40"
+              />
+
+              {/* Modal Body */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}
+                className="bg-white rounded-3xl w-full max-w-sm sm:max-w-md border border-pink-100 shadow-2xl p-5 sm:p-6 relative overflow-hidden z-50 flex flex-col gap-6 text-[#1e113a]"
+              >
+                {/* Header Row */}
+                <div className="flex items-center justify-between border-b border-pink-100/40 pb-3.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">✨</span>
+                    <div className="text-left">
+                      <h4 className="font-sans font-extrabold text-[#db0075] tracking-tight text-lg leading-tight">Spread the Joy!</h4>
+                      <p className="text-[10px] text-stone-500 uppercase font-bold tracking-wider leading-none mt-0.5">Share Vaishali Bakers Delights</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShareProduct(null)}
+                    className="w-8 h-8 rounded-full bg-stone-100 text-stone-500 hover:text-[#db0075] hover:bg-pink-50 flex items-center justify-center transition-all cursor-pointer border border-stone-200/20"
+                    aria-label="Close modal"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Digital Postcard Item Card */}
+                <div className="bg-pink-50/10 rounded-2xl p-3.5 border border-pink-100/20 flex gap-4 text-left">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 shadow-inner bg-slate-50 border border-stone-100">
+                    <img
+                      src={shareProduct.image}
+                      alt={shareProduct.name}
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-between py-0.5 flex-1 min-w-0 font-sans">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                        {shareProduct.isVeg && (
+                          <span className="border border-emerald-600 rounded-[2.5px] w-3 h-3 p-[1px] inline-flex items-center justify-center bg-white shrink-0" title="Pure Veg">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                          </span>
+                        )}
+                        <span className="text-[9px] uppercase tracking-widest text-[#db0075] font-extrabold bg-pink-100/50 px-1.5 py-0.5 rounded shrink-0 leading-none">
+                          Homemade
+                        </span>
+                      </div>
+                      <h5 className="font-sans font-extrabold text-[#1f1135] tracking-tight leading-tight text-sm sm:text-base truncate">
+                        {shareProduct.name}
+                      </h5>
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-stone-500 leading-snug line-clamp-2 pr-2 mt-1">
+                      {shareProduct.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Action Channels Group */}
+                <div className="flex flex-col gap-3 font-sans">
+                  
+                  {/* WhatsApp option */}
+                  <button
+                    type="button"
+                    onClick={() => handleShareWhatsApp(shareProduct)}
+                    className="w-full h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm tracking-wide transition-all cursor-pointer flex items-center justify-between px-5 shadow-xs group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <MessageCircle className="w-5 h-5 fill-white/10 group-hover:scale-110 transition-transform" />
+                      <span>Share on WhatsApp</span>
+                    </div>
+                    <span className="text-[10.5px] font-black bg-white/20 px-2.5 py-1 rounded-md uppercase tracking-wider">
+                      Send Msg
+                    </span>
+                  </button>
+
+                  {/* Instagram Story Copy option */}
+                  <button
+                    type="button"
+                    onClick={() => handleCopyInstagram(shareProduct)}
+                    className="w-full h-12 rounded-2xl bg-gradient-to-r from-[#db0075] via-pink-600 to-amber-500 hover:opacity-95 text-white font-bold text-sm tracking-wide transition-all cursor-pointer flex items-center justify-between px-5 shadow-xs group relative overflow-hidden"
+                  >
+                    <div className="flex items-center gap-3 font-sans">
+                      <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      <div className="flex flex-col text-left">
+                        <span>Copy Instagram Caption</span>
+                        <span className="text-[9px] text-white/85 font-normal leading-none mt-0.5">Link + description ready</span>
+                      </div>
+                    </div>
+                    <span className="text-[10.5px] font-black bg-white/20 px-2.5 py-1 rounded-md uppercase tracking-wider">
+                      {copied ? 'Copied! ✅' : 'Copy'}
+                    </span>
+                  </button>
+
+                  {/* Copy Link option */}
+                  <button
+                    type="button"
+                    onClick={() => handleCopyLink(shareProduct)}
+                    className="w-full h-12 rounded-2xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-700 font-extrabold text-xs sm:text-sm transition-all cursor-pointer flex items-center justify-between px-5"
+                  >
+                    <div className="flex items-center gap-3">
+                      {copiedLink ? <Check className="w-4 h-4 text-emerald-600 animate-pulse" /> : <Copy className="w-4 h-4 text-stone-500" />}
+                      <span>Copy Direct Product Link</span>
+                    </div>
+                    <span className="text-[10px] text-stone-500 font-mono">
+                      {copiedLink ? 'Copied' : 'Click to copy'}
+                    </span>
+                  </button>
+
+                </div>
+
+                {/* Feedback Toast / Note inside modal */}
+                <div className="text-center pt-1 border-t border-stone-100">
+                  <p className="text-[11px] text-stone-400 font-medium min-h-[16px] font-sans">
+                    {copied ? (
+                      <span className="text-[#db0075] font-bold">✨ Caption copied! Paste it into your Instagram post, Story, or DM! ✨</span>
+                    ) : copiedLink ? (
+                      <span className="text-emerald-600 font-bold">✨ Direct copy link saved! Paste to share anywhere! ✨</span>
+                    ) : (
+                      <span>Select a social platform to share with friends and family</span>
+                    )}
+                  </p>
+                </div>
+
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>

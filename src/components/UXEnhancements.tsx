@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, X, MessageCircle } from 'lucide-react';
-import { CONTACT_INFO } from '../data';
+import { X, MessageCircle } from 'lucide-react';
 
 interface LightboxProps {
   isOpen: boolean;
@@ -71,26 +70,26 @@ export function FloatingWhatsAppButton() {
   };
 
   return (
-    <div id="floating-whatsapp-trigger" className="fixed bottom-20 sm:bottom-6 right-6 z-50 select-none">
+    <div id="floating-whatsapp-trigger" className="fixed bottom-6 right-6 z-50 select-none">
       <motion.button
         onClick={triggerWhatsApp}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="relative bg-emerald-600 hover:bg-emerald-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-all cursor-pointer group"
+        className="relative bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-full shadow-2xl flex items-center justify-center transition-all cursor-pointer group"
         aria-label="Chat on WhatsApp"
       >
         {/* Glow pulsing rings */}
         <span className="absolute inset-0 rounded-full border border-emerald-500 animate-ping opacity-75 scale-105"></span>
-        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+        <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-pink-500"></span>
         </span>
 
-        {/* Logo Icon */}
-        <MessageCircle className="w-6 h-6" />
+        {/* Logo Icon (slightly smaller) */}
+        <MessageCircle className="w-5 h-5" />
 
-        {/* Hover Tooltip display text */}
-        <span className="absolute right-14 whitespace-nowrap bg-brand-brown text-white text-[11px] font-bold py-1.5 px-3 rounded-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all shadow-md">
+        {/* Hover Tooltip display text (positioned to the left of the button) */}
+        <span className="absolute right-13 whitespace-nowrap bg-brand-brown text-white text-[10px] font-bold py-1.5 px-3 rounded-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all shadow-md">
           Chat with Vaishali
         </span>
       </motion.button>
@@ -98,35 +97,4 @@ export function FloatingWhatsAppButton() {
   );
 }
 
-export function MobileStickyDialPhone() {
-  return (
-    <div id="mobile-sticky-dial" className="fixed bottom-0 left-0 right-0 z-50 bg-brand-brown border-t border-pink-500/15 py-3.5 px-4 shadow-2xl sm:hidden flex items-center justify-between font-sans">
-      <div className="flex flex-col">
-        <span className="text-[9px] text-pink-300 uppercase font-bold tracking-widest leading-none block">Vaishali Bakers</span>
-        <span className="text-white text-xs font-semibold mt-1">Nilesh Sarang, Founder</span>
-      </div>
 
-      <div className="flex items-center gap-2">
-        {/* WhatsApp Mobile direct option */}
-        <a
-          href="https://wa.me/919892047995"
-          target="_blank"
-          rel="noreferrer"
-          className="bg-emerald-600 active:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
-        >
-          <MessageCircle className="w-4 h-4" />
-          <span>WhatsApp Chat</span>
-        </a>
-
-        {/* Click to Dial option */}
-        <a
-          href={`tel:${CONTACT_INFO.phone}`}
-          className="bg-[#db0075] hover:bg-[#df006c] text-white px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-md active:scale-95 transition-all"
-        >
-          <Phone className="w-3.5 h-3.5" />
-          <span>Call Now</span>
-        </a>
-      </div>
-    </div>
-  );
-}

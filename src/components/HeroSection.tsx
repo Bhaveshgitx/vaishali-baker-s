@@ -1,68 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { CONTACT_INFO } from '../data';
+import React from 'react';
+import { motion } from 'motion/react';
 import heroCoverImg from '../assets/images/hero_cover_1779797137466.png';
 
 export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const SLIDES = [
-    {
-      id: 1,
-      image: heroCoverImg,
-      title: "Signature Hazelnut Caramel Celebration Cake",
-      rating: "4.9",
-      reviews: "2000+",
-      tag: "Trending",
-      isFresh: true
-    },
-    {
-      id: 2,
-      image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600",
-      title: "Vibrant Summer Strawberry Cake",
-      rating: "4.8",
-      reviews: "1500+",
-      tag: "Bestseller",
-      isFresh: true
-    },
-    {
-      id: 3,
-      image: "https://images.unsplash.com/photo-1535141192574-5d4897c13636?auto=format&fit=crop&q=80&w=600",
-      title: "White Chocolate Premium Swirl",
-      rating: "4.9",
-      reviews: "1850+",
-      tag: "Chef Special",
-      isFresh: true
-    }
-  ];
-
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
   const handleScrollToMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const element = document.getElementById('catalog-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const handleScrollToBulk = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const element = document.getElementById('bulk-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -85,17 +28,6 @@ export default function HeroSection() {
           {/* LEFT COLUMN: Texts and Actions */}
           <div className="lg:col-span-7 text-left flex flex-col justify-center space-y-6">
             
-            {/* 1. Promo Badge */}
-            <motion.div 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex self-start items-center gap-2 bg-white border border-pink-200/60 rounded-full px-4 py-1.5 text-xs text-[#db0075] font-bold shadow-xs select-none"
-            >
-              <span>🎉</span>
-              <span>Free Delivery on Orders Above ₹399</span>
-            </motion.div>
-
             {/* 2. Main Title Heading matching Monginis (Freshly Baked Happiness) */}
             <div className="space-y-2">
               <motion.h1 
@@ -109,16 +41,6 @@ export default function HeroSection() {
                   Happiness
                 </span>
               </motion.h1>
-
-              {/* Sub-Brand Title / Owner attribution */}
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-sm sm:text-base font-serif italic text-[#db0075] tracking-wide"
-              >
-                Vaishali Bakers — handcrafted with love by <span className="underline decoration-[#db0075] decoration-2 underline-offset-4 font-bold">{CONTACT_INFO.owner}</span>
-              </motion.p>
             </div>
 
             {/* 3. Slogan narrative description (Exact Copy from Screenshot) */}
@@ -152,53 +74,13 @@ export default function HeroSection() {
               </button>
             </motion.div>
 
-            {/* 5. Metrics horizontally displayed at bottom of content */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-6 border-t border-pink-100/60"
-            >
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-extrabold text-[#db0075] font-mono leading-tight">1000+</span>
-                <span className="text-[11px] text-stone-500 uppercase font-bold mt-0.5 font-sans">Orders Served</span>
-              </div>
-              <div className="h-6 w-[1px] bg-pink-100 hidden sm:block"></div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-extrabold text-[#db0075] font-mono leading-tight">50+</span>
-                <span className="text-[11px] text-stone-500 uppercase font-bold mt-0.5 font-sans">Dessert Varieties</span>
-              </div>
-              <div className="h-6 w-[1px] bg-pink-100 hidden sm:block"></div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-extrabold text-[#db0075] font-mono leading-tight">100%</span>
-                <span className="text-[11px] text-stone-500 uppercase font-bold mt-0.5 font-sans">Veg & Pure Quality</span>
-              </div>
-            </motion.div>
-
           </div>
 
-          {/* RIGHT COLUMN: Interactive sliding poster matching Monginis styling */}
+          {/* RIGHT COLUMN: Highly polished cover poster matching Monginis styling */}
           <div className="lg:col-span-5 relative flex flex-col justify-center items-center">
             
             {/* Soft backdrop glow */}
             <div className="absolute -z-10 w-[280px] sm:w-[350px] md:w-[400px] aspect-square rounded-full bg-gradient-to-tr from-pink-200/50 to-pink-50 blur-2xl"></div>
-
-            {/* Left and Right Chevron Navigation Buttons */}
-            <button
-              onClick={handlePrev}
-              className="absolute left-1 sm:-left-6 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-stone-100 hover:border-pink-300 text-[#db0075] hover:bg-pink-50 flex items-center justify-center shadow-lg hover:-translate-x-0.5 transition-all z-30 cursor-pointer"
-              aria-label="Previous Slide"
-            >
-              <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
-            </button>
-
-            <button
-              onClick={handleNext}
-              className="absolute right-1 sm:-right-6 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-stone-100 hover:border-pink-300 text-[#db0075] hover:bg-pink-50 flex items-center justify-center shadow-lg hover:translate-x-0.5 transition-all z-30 cursor-pointer"
-              aria-label="Next Slide"
-            >
-              <ChevronRight className="w-5 h-5 stroke-[2.5]" />
-            </button>
 
             {/* Platter Frame and Floating Badges */}
             <motion.div 
@@ -209,20 +91,12 @@ export default function HeroSection() {
             >
               {/* Main Banner Image Container */}
               <div className="w-full h-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white relative">
-                
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={SLIDES[currentSlide].id}
-                    src={SLIDES[currentSlide].image}
-                    alt={SLIDES[currentSlide].title}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </AnimatePresence>
+                <img
+                  src={heroCoverImg}
+                  alt="Signature Hazelnut Caramel Celebration Cake"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
                 
                 {/* Overlay vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-pink-900/10 via-transparent to-transparent pointer-events-none"></div>
@@ -240,72 +114,21 @@ export default function HeroSection() {
                   ★
                 </div>
                 <div className="text-left leading-tight font-sans">
-                  <div className="text-stone-850 font-black text-xs">{SLIDES[currentSlide].rating} Rating</div>
-                  <span className="text-[9px] text-stone-500 font-semibold mt-0.5 block">{SLIDES[currentSlide].reviews} Reviews</span>
+                  <div className="text-stone-850 font-black text-xs">4.9 Rating</div>
+                  <span className="text-[9px] text-stone-500 font-semibold mt-0.5 block">2000+ Reviews</span>
                 </div>
               </div>
 
               {/* FLOATING BADGE C (Middle Right - "Trending sticker") */}
               <div className="absolute top-1/2 -right-2 -translate-y-1/2 bg-[#db0075] text-white rounded-l-xl rounded-r-xs pl-3 pr-2.5 py-1.5 shadow-lg z-20 flex items-center gap-1 font-sans">
                 <span className="text-[10px] animate-pulse">🔥</span>
-                <span className="text-[9px] uppercase tracking-wider font-extrabold">{SLIDES[currentSlide].tag}</span>
+                <span className="text-[9px] uppercase tracking-wider font-extrabold">Trending</span>
               </div>
 
             </motion.div>
 
-            {/* Slide Index Dot Page Indicators */}
-            <div className="flex items-center justify-center gap-2 mt-5">
-              {SLIDES.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`h-2 transition-all duration-300 rounded-full cursor-pointer ${
-                    currentSlide === idx ? 'w-8 bg-[#db0075]' : 'w-2 bg-stone-300 hover:bg-stone-400'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
           </div>
 
-        </div>
-
-        {/* Bottom Horizontal Features Bar exactly styled with pink circle icons like Monginis bottom view */}
-        <div className="mt-16 pt-10 border-t border-pink-100/60 w-full font-sans select-none">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            <div className="flex items-center gap-4 bg-white p-5 rounded-2xl border border-pink-200/20 shadow-xs hover:border-pink-300/30 transition-all">
-              <div className="w-12 h-12 rounded-full bg-pink-50 text-[#db0075] flex items-center justify-center shrink-0">
-                <span className="text-xl">❤️</span>
-              </div>
-              <div className="text-left font-sans">
-                <h4 className="text-[#100b21] font-black text-sm text-[15px]">Made with Love</h4>
-                <p className="text-xs text-stone-500 mt-1 font-semibold">Bespoke baking since 2012</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 bg-white p-5 rounded-2xl border border-pink-200/20 shadow-xs hover:border-pink-300/30 transition-all">
-              <div className="w-12 h-12 rounded-full bg-pink-50 text-[#db0075] flex items-center justify-center shrink-0">
-                <span className="text-xl">🚚</span>
-              </div>
-              <div className="text-left font-sans">
-                <h4 className="text-[#100b21] font-black text-sm text-[15px]">Free Delivery</h4>
-                <p className="text-xs text-stone-500 mt-1 font-semibold font-sans">On orders over ₹399</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 bg-white p-5 rounded-2xl border border-pink-200/20 shadow-xs hover:border-pink-300/30 transition-all">
-              <div className="w-12 h-12 rounded-full bg-pink-50 text-[#db0075] flex items-center justify-center shrink-0">
-                <span className="text-xl">⏰</span>
-              </div>
-              <div className="text-left font-sans">
-                <h4 className="text-[#100b21] font-black text-sm text-[15px]">Same Day Delivery</h4>
-                <p className="text-xs text-stone-500 mt-1 font-semibold">Freshly baked to reservation</p>
-              </div>
-            </div>
-
-          </div>
         </div>
 
       </div>
